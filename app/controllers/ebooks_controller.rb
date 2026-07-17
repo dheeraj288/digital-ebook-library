@@ -15,6 +15,7 @@ class EbooksController < ApplicationController
   end
 
   def new
+  @ebook = Ebook.new
   end
 
   def create

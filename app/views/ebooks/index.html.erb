@@ -7,3 +7,13 @@
       class: "rounded-lg bg-indigo-600 px-5 py-2.5 text-white hover:bg-indigo-700" %>
 
 <% end %>
+
+<%= render "shared/empty_state",
+           title: "No ebooks yet",
+           description: "Upload your first ebook to start building your library." do %>
+
+  <%= link_to "Upload Ebook",
+      new_ebook_path,
+      class: "inline-flex items-center rounded-lg bg-indigo-600 px-5 py-3 text-sm font-medium text-white hover:bg-indigo-700" %>
+
+<% end %>
