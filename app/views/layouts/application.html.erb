@@ -1,18 +1,24 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title>EbookLibrary</title>
+    <title>Ebook Library</title>
     <meta name="viewport" content="width=device-width,initial-scale=1">
+
     <%= csrf_meta_tags %>
     <%= csp_meta_tag %>
-    <%= stylesheet_link_tag "tailwind", "data-turbo-track": "reload" %>
 
+    <%= stylesheet_link_tag "tailwind", "data-turbo-track": "reload" %>
     <%= stylesheet_link_tag "application", "data-turbo-track": "reload" %>
+
     <%= javascript_importmap_tags %>
   </head>
 
-  <body>
-    <main class="container mx-auto mt-28 px-5 flex">
+  <body class="bg-slate-100 min-h-screen">
+    <%= render "shared/navbar" %>
+
+    <main class="max-w-7xl mx-auto px-4 py-8">
+      <%= render "shared/flash" %>
+
       <%= yield %>
     </main>
   </body>
