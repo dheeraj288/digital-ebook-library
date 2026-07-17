@@ -1,6 +1,8 @@
+<% content_for :title, "Ebook Library" %>
+
 <%= render "shared/page_header",
-           title: "Ebook Library",
-           subtitle: "Manage your digital collection." do %>
+    title: "Ebook Library",
+    subtitle: "Manage your digital collection." do %>
 
   <%= link_to "Upload Ebook",
       new_ebook_path,
@@ -8,12 +10,54 @@
 
 <% end %>
 
-<%= render "shared/empty_state",
-           title: "No ebooks yet",
-           description: "Upload your first ebook to start building your library." do %>
+<% if @ebooks.any? %>
 
-  <%= link_to "Upload Ebook",
-      new_ebook_path,
-      class: "inline-flex items-center rounded-lg bg-indigo-600 px-5 py-3 text-sm font-medium text-white hover:bg-indigo-700" %>
+  <div class="space-y-4">
+
+    <% @ebooks.each do |ebook| %>
+
+     <div class="overflow-hidden rounded-xl bg-white shadow">
+
+      <% if ebook.cover_image.attached? %>
+        <%= image_tag ebook.cover_image,
+            class: "h-56 w-full object-cover" %>
+      <% else %>
+        <div class="flex h-56 items-center justify-center bg-slate-100 text-6xl">
+          📕
+        </div>
+      <% end %>
+
+      <div class="p-6">
+        <h2 class="text-xl font-semibold text-slate-900">
+          <%= ebook.title %>
+        </h2>
+
+        <p class="mt-1 text-slate-600">
+          <%= ebook.author %>
+        </p>
+
+        <% if ebook.description.present? %>
+          <p class="mt-4 line-clamp-2 text-sm text-slate-500">
+            <%= ebook.description %>
+          </p>
+        <% end %>
+      </div>
+
+    </div>
+    <% end %>
+
+  </div>
+
+<% else %>
+
+  <%= render "shared/empty_state",
+      title: "No ebooks yet",
+      description: "Upload your first ebook." do %>
+
+      <%= link_to "Upload Ebook",
+          new_ebook_path,
+          class: "rounded-lg bg-indigo-600 px-5 py-2.5 text-white hover:bg-indigo-700" %>
+
+  <% end %>
 
 <% end %>

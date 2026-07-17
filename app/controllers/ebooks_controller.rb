@@ -9,6 +9,7 @@ class EbooksController < ApplicationController
   ]
 
   def index
+    @ebooks = Ebook.order(created_at: :desc)
   end
 
   def show
@@ -19,6 +20,13 @@ class EbooksController < ApplicationController
   end
 
   def create
+    @ebook = Ebook.new(ebook_params)
+
+    if @ebook.save
+      redirect_to ebooks_path, notice: "Ebook uploaded successfully."
+    else
+      render :new, status: :unprocessable_entity
+    end
   end
 
   def edit
