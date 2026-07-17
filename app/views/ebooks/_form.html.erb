@@ -1,0 +1,39 @@
+<%= form_with(model: ebook, class: "space-y-6") do |form| %>
+
+  <% if ebook.errors.any? %>
+    <div class="rounded-lg border border-red-200 bg-red-50 p-4">
+      <h2 class="font-semibold text-red-700">
+        Please fix the following errors:
+      </h2>
+
+      <ul class="mt-2 list-disc pl-5 text-sm text-red-600">
+        <% ebook.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div>
+    <%= form.label :title, class: "mb-2 block text-sm font-medium text-slate-700" %>
+
+    <%= form.text_field :title,
+        class: "w-full rounded-lg border border-slate-300 px-4 py-2 focus:border-indigo-500 focus:ring-indigo-500" %>
+  </div>
+
+  <div>
+    <%= form.label :author, class: "mb-2 block text-sm font-medium text-slate-700" %>
+
+    <%= form.text_field :author,
+        class: "w-full rounded-lg border border-slate-300 px-4 py-2 focus:border-indigo-500 focus:ring-indigo-500" %>
+  </div>
+
+  <div>
+    <%= form.label :description, class: "mb-2 block text-sm font-medium text-slate-700" %>
+
+    <%= form.text_area :description,
+        rows: 4,
+        class: "w-full rounded-lg border border-slate-300 px-4 py-2 focus:border-indigo-500 focus:ring-indigo-500" %>
+  </div>
+
+<% end %>
