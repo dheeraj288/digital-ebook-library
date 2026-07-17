@@ -1,4 +1,9 @@
-<div>
-  <h1 class="font-bold text-4xl">Ebooks#index</h1>
-  <p>Find me in app/views/ebooks/index.html.erb</p>
-</div>
+<%= render "shared/page_header",
+           title: "Ebook Library",
+           subtitle: "Manage your digital collection." do %>
+
+  <%= link_to "Upload Ebook",
+      new_ebook_path,
+      class: "rounded-lg bg-indigo-600 px-5 py-2.5 text-white hover:bg-indigo-700" %>
+
+<% end %>
