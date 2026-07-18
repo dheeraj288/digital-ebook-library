@@ -1,5 +1,10 @@
 class EbooksController < ApplicationController
-  before_action :set_ebook, only: [:show]
+  before_action :set_ebook, only: %i[
+    show
+    edit
+    update
+    destroy
+  ]
 
   def index
     @ebooks = Ebook.order(created_at: :desc)
@@ -20,6 +25,19 @@ class EbooksController < ApplicationController
     else
       render :new, status: :unprocessable_entity
     end
+  end
+
+  def update
+    if @ebook.update(ebook_params)
+      redirect_to ebook_path(@ebook), notice: "Ebook updated successfully."
+    else
+      render :edit, status: :unprocessable_entity
+    end
+  end
+
+  def destroy
+    @ebook.destroy
+    redirect_to ebooks_path, notice: "Ebook deleted successfully."
   end
 
   private
