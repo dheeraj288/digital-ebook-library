@@ -1,23 +1,15 @@
 class EbooksController < ApplicationController
-  before_action :set_ebook, only: %i[
-    show
-    edit
-    update
-    destroy
-    read
-    download
-  ]
+  before_action :set_ebook, only: [:show]
 
   def index
     @ebooks = Ebook.order(created_at: :desc)
   end
 
   def show
-    @ebook = Ebook.find(params[:id])
   end
 
   def new
-  @ebook = Ebook.new
+    @ebook = Ebook.new
   end
 
   def create
@@ -28,24 +20,6 @@ class EbooksController < ApplicationController
     else
       render :new, status: :unprocessable_entity
     end
-  end
-
-  def edit
-  end
-
-  def update
-  end
-
-  def destroy
-  end
-
-  def read
-  end
-
-  def download
-  end
-
-  def search
   end
 
   private
