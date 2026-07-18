@@ -13,6 +13,7 @@ class EbooksController < ApplicationController
   end
 
   def show
+    @ebook = Ebook.find(params[:id])
   end
 
   def new

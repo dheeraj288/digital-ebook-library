@@ -1,4 +1,67 @@
-<div>
-  <h1 class="font-bold text-4xl">Ebooks#show</h1>
-  <p>Find me in app/views/ebooks/show.html.erb</p>
+<% content_for :title, @ebook.title %>
+
+<%= render "shared/page_header",
+    title: @ebook.title,
+    subtitle: @ebook.author do %>
+
+  <%= link_to "← Back",
+      ebooks_path,
+      class: "rounded-lg border border-slate-300 px-5 py-2.5 text-slate-700 hover:bg-slate-100" %>
+
+<% end %>
+
+<div class="mx-auto max-w-5xl">
+
+  <div class="grid gap-8 rounded-xl bg-white p-8 shadow lg:grid-cols-3">
+
+    <div>
+
+      <% if @ebook.cover_image.attached? %>
+
+        <%= image_tag @ebook.cover_image,
+            class: "w-full rounded-lg shadow-md" %>
+
+      <% else %>
+
+        <div class="flex h-96 items-center justify-center rounded-lg bg-slate-100 text-8xl">
+          📕
+        </div>
+
+      <% end %>
+
+    </div>
+
+    <div class="lg:col-span-2">
+
+      <h1 class="text-3xl font-bold text-slate-900">
+        <%= @ebook.title %>
+      </h1>
+
+      <p class="mt-2 text-lg text-slate-600">
+        By <%= @ebook.author %>
+      </p>
+
+      <% if @ebook.published_at.present? %>
+        <p class="mt-4 text-sm text-slate-500">
+          Published:
+          <%= @ebook.published_at.strftime("%d %B %Y") %>
+        </p>
+      <% end %>
+
+      <div class="mt-8">
+
+        <h2 class="text-lg font-semibold">
+          Description
+        </h2>
+
+        <p class="mt-2 leading-7 text-slate-600">
+          <%= @ebook.description.presence || "No description available." %>
+        </p>
+
+      </div>
+
+    </div>
+
+  </div>
+
 </div>
