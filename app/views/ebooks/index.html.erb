@@ -4,9 +4,25 @@
     title: "Ebook Library",
     subtitle: "Manage your digital collection." do %>
 
-  <%= link_to "Upload Ebook",
-      new_ebook_path,
-      class: "rounded-lg bg-indigo-600 px-5 py-2.5 text-white transition hover:bg-indigo-700" %>
+    <div class="mb-8">
+  <%= form_with url: ebooks_path,
+                method: :get,
+                local: true do |form| %>
+
+    <div class="flex gap-3">
+
+      <%= form.text_field :query,
+          value: params[:query],
+          placeholder: "Search by title or author...",
+          class: "w-full rounded-lg border border-slate-300 px-4 py-3 focus:border-indigo-500 focus:outline-none" %>
+
+      <%= form.submit "Search",
+          class: "rounded-lg bg-indigo-600 px-6 py-3 text-white hover:bg-indigo-700" %>
+
+    </div>
+
+  <% end %>
+</div>
 
 <% end %>
 

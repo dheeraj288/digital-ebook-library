@@ -7,7 +7,8 @@ class EbooksController < ApplicationController
   ]
 
   def index
-    @ebooks = Ebook.order(created_at: :desc)
+    @ebooks = Ebook.recent
+    @ebooks = @ebooks.search(params[:query]) if params[:query].present?
   end
 
   def show
