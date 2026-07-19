@@ -9,11 +9,22 @@ class EbooksController < ApplicationController
   ]
 
   def index
-    @query = params[:query]
+  @query  = params[:query]
+  @author = params[:author]
+  @year   = params[:year]
+  @sort   = params[:sort]
 
-    @ebooks = Ebook.recent
-    @ebooks = @ebooks.search(@query) if @query.present?
-  end
+  @ebooks = Ebook
+              .search(@query)
+              .filter_by_author(@author)
+              .filter_by_year(@year)
+              .sort_by_option(@sort)
+
+  Rails.logger.debug "Ebooks count: #{@ebooks.count}"
+
+  @authors = Ebook.distinct.order(:author).pluck(:author)
+  @years = Ebook.where.not(published_at: nil).pluck(:published_at).map(&:year).uniq.sort.reverse
+end
 
   def show
   end
@@ -69,6 +80,24 @@ class EbooksController < ApplicationController
                   alert: "PDF file not found."
     end
   end
+
+  def authors
+    Ebook.distinct.order(:author).pluck(:author)
+  end
+
+  helper_method :authors
+
+  def years
+    Ebook
+      .where.not(published_at: nil)
+      .pluck(:published_at)
+      .map(&:year)
+      .uniq
+      .sort
+      .reverse
+  end
+
+helper_method :years
 
   private
 

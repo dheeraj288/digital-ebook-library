@@ -81,3 +81,5 @@ group :test do
 end
 
 gem 'pry-rails'
+
+gem "pagy", "~> 9.3"
