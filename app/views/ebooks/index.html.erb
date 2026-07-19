@@ -14,9 +14,7 @@
 
   <%= form_with url: ebooks_path,
     method: :get,
-    data: {
-      turbo_frame: "ebooks"
-    } do |form| %>
+    local: true do |form| %>
 
     <div class="grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-5">
 
@@ -65,4 +63,4 @@
 
 </div>
 
-<%= render "ebook_list" %>
+<%= render "ebooks", ebooks: @ebooks %>

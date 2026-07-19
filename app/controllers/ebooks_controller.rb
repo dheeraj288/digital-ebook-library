@@ -30,9 +30,7 @@ class EbooksController < ApplicationController
                 .sort
                 .reverse
 
-    if turbo_frame_request?
-      render partial: "ebook_list"
-    end
+    
   end
 
   def show
