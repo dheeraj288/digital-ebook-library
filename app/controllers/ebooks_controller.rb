@@ -1,10 +1,5 @@
 class EbooksController < ApplicationController
-  before_action :set_ebook, only: %i[
-    show
-    edit
-    update
-    destroy
-  ]
+  before_action :set_ebook, only: %i[show edit update destroy read download]
 
   def index
     @ebooks = Ebook.recent
@@ -28,6 +23,9 @@ class EbooksController < ApplicationController
     end
   end
 
+  def edit
+  end
+
   def update
     if @ebook.update(ebook_params)
       redirect_to ebook_path(@ebook), notice: "Ebook updated successfully."
@@ -39,6 +37,22 @@ class EbooksController < ApplicationController
   def destroy
     @ebook.destroy
     redirect_to ebooks_path, notice: "Ebook deleted successfully."
+  end
+
+  def read
+    if @ebook.pdf_file.attached?
+      redirect_to rails_blob_url(@ebook.pdf_file, disposition: "inline")
+    else
+      redirect_to ebook_path(@ebook), alert: "PDF file not found."
+    end
+  end
+
+  def download
+    if @ebook.pdf_file.attached?
+      redirect_to rails_blob_url(@ebook.pdf_file, disposition: "attachment")
+    else
+      redirect_to ebook_path(@ebook), alert: "PDF file not found."
+    end
   end
 
   private

@@ -1,8 +1,14 @@
 <% content_for :title, "Upload Ebook" %>
 
 <%= render "shared/page_header",
-    title: "Upload New Ebook",
-    subtitle: "Add a new ebook to your digital library." %>
+    title: "Upload Ebook",
+    subtitle: "Add a new ebook to your library" do %>
+
+  <%= link_to "← Back",
+      ebooks_path,
+      class: "rounded-lg border border-slate-300 px-4 py-2 text-sm font-medium text-slate-700 hover:bg-slate-100" %>
+
+<% end %>
 
 <div class="mx-auto max-w-3xl rounded-xl bg-white p-8 shadow-sm">
   <%= render "form", ebook: @ebook %>

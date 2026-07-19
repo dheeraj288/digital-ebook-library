@@ -7,12 +7,12 @@ class Ebook < ApplicationRecord
 
   scope :recent, -> { order(created_at: :desc) }
 
-  scope :search, ->(query) {
+  scope :search, ->(query) do
     if query.present?
       where(
-        "title ILIKE :query OR author ILIKE :query",
-        query: "%#{query}%"
+        "title ILIKE :q OR author ILIKE :q",
+        q: "%#{query}%"
       )
     end
-  }
+  end
 end
