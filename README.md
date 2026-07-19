@@ -91,29 +91,6 @@ db/
 storage/
 ```
 
----
-
-## 📸 Screenshots
-
-You can add screenshots here after deployment.
-
-- Home Page
-- Ebook Details
-- Upload Ebook
-- Edit Ebook
-
----
-
-## 📌 Future Improvements
-
-- User Authentication
-- Categories
-- Favorites
-- Pagination
-- Dashboard
-- API Support
-
----
 
 ## 👨‍💻 Author
 
