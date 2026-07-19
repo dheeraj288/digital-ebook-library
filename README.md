@@ -100,22 +100,6 @@ spec/
 storage/
 ```
 
----
-
-## 📸 Screenshots
-
-You can add screenshots here.
-
-- Home Page
-- Upload Ebook
-- Ebook Details
-- Edit Ebook
-- Search & Filter
-- Pagination
-- Show
-
----
-
 ## 📸 Screenshots
 
 ### Home Page
