@@ -34,9 +34,19 @@
           ebook_path(ebook),
           class: "flex-1 rounded-lg bg-indigo-600 py-2 text-center text-sm font-medium text-white hover:bg-indigo-700" %>
 
+
       <%= link_to "Edit",
           edit_ebook_path(ebook),
           class: "rounded-lg bg-amber-500 px-4 py-2 text-sm font-medium text-white hover:bg-amber-600" %>
+
+
+      <%= link_to "Delete",
+          ebook_path(ebook),
+          data: {
+            turbo_method: :delete,
+            turbo_confirm: "Are you sure you want to delete '#{ebook.title}'?"
+          },
+          class: "rounded-lg bg-red-600 px-4 py-2 text-sm font-medium text-white hover:bg-red-700" %>
 
     </div>
 
