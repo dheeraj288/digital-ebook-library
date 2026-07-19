@@ -1,0 +1,25 @@
+<% if ebooks.present? %>
+
+  <div class="grid grid-cols-1 gap-6 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4">
+
+    <% ebooks.each do |ebook| %>
+      <%= render "ebook", ebook: ebook %>
+    <% end %>
+
+  </div>
+
+<% else %>
+
+  <%= render "shared/empty_state",
+      title: "No ebooks found",
+      description: params[:query].present? ? "Try another search keyword." : "Upload your first ebook." do %>
+
+    <%= link_to(
+          params[:query].present? ? "Clear Search" : "Upload Ebook",
+          params[:query].present? ? ebooks_path : new_ebook_path,
+          class: "rounded-lg bg-indigo-600 px-5 py-2.5 text-white hover:bg-indigo-700"
+        ) %>
+
+  <% end %>
+
+<% end %>

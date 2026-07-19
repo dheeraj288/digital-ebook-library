@@ -1,9 +1,18 @@
 class EbooksController < ApplicationController
-  before_action :set_ebook, only: %i[show edit update destroy read download]
+  before_action :set_ebook, only: %i[
+    show
+    edit
+    update
+    destroy
+    read
+    download
+  ]
 
   def index
+    @query = params[:query]
+
     @ebooks = Ebook.recent
-    @ebooks = @ebooks.search(params[:query]) if params[:query].present?
+    @ebooks = @ebooks.search(@query) if @query.present?
   end
 
   def show
@@ -28,7 +37,7 @@ class EbooksController < ApplicationController
 
   def update
     if @ebook.update(ebook_params)
-      redirect_to ebook_path(@ebook), notice: "Ebook updated successfully."
+      redirect_to @ebook, notice: "Ebook updated successfully."
     else
       render :edit, status: :unprocessable_entity
     end
@@ -36,22 +45,28 @@ class EbooksController < ApplicationController
 
   def destroy
     @ebook.destroy
-    redirect_to ebooks_path, notice: "Ebook deleted successfully."
+
+    redirect_to ebooks_path,
+                notice: "Ebook deleted successfully."
   end
 
   def read
     if @ebook.pdf_file.attached?
-      redirect_to rails_blob_url(@ebook.pdf_file, disposition: "inline")
+      redirect_to rails_blob_url(@ebook.pdf_file,
+                                 disposition: "inline")
     else
-      redirect_to ebook_path(@ebook), alert: "PDF file not found."
+      redirect_to @ebook,
+                  alert: "PDF file not found."
     end
   end
 
   def download
     if @ebook.pdf_file.attached?
-      redirect_to rails_blob_url(@ebook.pdf_file, disposition: "attachment")
+      redirect_to rails_blob_url(@ebook.pdf_file,
+                                 disposition: "attachment")
     else
-      redirect_to ebook_path(@ebook), alert: "PDF file not found."
+      redirect_to @ebook,
+                  alert: "PDF file not found."
     end
   end
 
