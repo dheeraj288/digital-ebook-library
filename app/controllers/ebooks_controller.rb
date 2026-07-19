@@ -9,22 +9,31 @@ class EbooksController < ApplicationController
   ]
 
   def index
-  @query  = params[:query]
-  @author = params[:author]
-  @year   = params[:year]
-  @sort   = params[:sort]
+    @query  = params[:query]
+    @author = params[:author]
+    @year   = params[:year]
+    @sort   = params[:sort]
 
-  @ebooks = Ebook
-              .search(@query)
-              .filter_by_author(@author)
-              .filter_by_year(@year)
-              .sort_by_option(@sort)
+    @ebooks = Ebook
+                .search(@query)
+                .filter_by_author(@author)
+                .filter_by_year(@year)
+                .sort_by_option(@sort)
 
-  Rails.logger.debug "Ebooks count: #{@ebooks.count}"
+    @authors = Ebook.distinct.order(:author).pluck(:author)
 
-  @authors = Ebook.distinct.order(:author).pluck(:author)
-  @years = Ebook.where.not(published_at: nil).pluck(:published_at).map(&:year).uniq.sort.reverse
-end
+    @years = Ebook
+                .where.not(published_at: nil)
+                .pluck(:published_at)
+                .map(&:year)
+                .uniq
+                .sort
+                .reverse
+
+    if turbo_frame_request?
+      render partial: "ebook_list"
+    end
+  end
 
   def show
   end
