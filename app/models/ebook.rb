@@ -3,9 +3,8 @@ class Ebook < ApplicationRecord
   has_one_attached :pdf_file
 
   validates :title, :author, :description, :published_at, presence: true
-
-  validate :cover_image_must_be_attached
-  validate :pdf_file_must_be_attached
+  validate :cover_image_validation
+  validate :pdf_file_validation
 
   scope :recent, -> { order(created_at: :desc) }
 
@@ -47,11 +46,37 @@ class Ebook < ApplicationRecord
 
   private
 
-  def cover_image_must_be_attached
-    errors.add(:cover_image, "must be attached") unless cover_image.attached?
+  def cover_image_validation
+    unless cover_image.attached?
+      errors.add(:cover_image, "must be attached")
+      return
+    end
+
+    unless cover_image.content_type.in?(%w[
+      image/jpeg
+      image/png
+      image/webp
+    ])
+      errors.add(:cover_image, "must be a JPG, PNG or WEBP image")
+    end
+
+    if cover_image.blob.byte_size > 5.megabytes
+      errors.add(:cover_image, "must be smaller than 5 MB")
+    end
   end
 
-  def pdf_file_must_be_attached
-    errors.add(:pdf_file, "must be attached") unless pdf_file.attached?
+  def pdf_file_validation
+    unless pdf_file.attached?
+      errors.add(:pdf_file, "must be attached")
+      return
+    end
+
+    unless pdf_file.content_type == "application/pdf"
+      errors.add(:pdf_file, "must be a PDF")
+    end
+
+    if pdf_file.blob.byte_size > 20.megabytes
+      errors.add(:pdf_file, "must be smaller than 20 MB")
+    end
   end
 end
