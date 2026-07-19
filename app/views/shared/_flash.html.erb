@@ -1,4 +1,5 @@
 <% flash.each do |type, message| %>
+
   <% color_classes =
       case type.to_sym
       when :notice
@@ -10,8 +11,10 @@
       end
   %>
 
-  <div data-flash
-   class="mb-6 flex items-center justify-between rounded-lg border-l-4 p-4 shadow-sm <%= color_classes %>">
+  <div
+    data-controller="flash"
+    class="mb-6 flex items-center justify-between rounded-lg border-l-4 p-4 shadow-sm transition-all duration-500 <%= color_classes %>">
+
     <p class="font-medium">
       <%= message %>
     </p>
@@ -19,8 +22,10 @@
     <button
       type="button"
       onclick="this.parentElement.remove()"
-      class="ml-4 text-xl font-bold opacity-60 hover:opacity-100">
+      class="ml-4 text-xl font-bold opacity-60 transition hover:opacity-100">
       ×
     </button>
+
   </div>
+
 <% end %>

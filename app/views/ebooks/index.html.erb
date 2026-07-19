@@ -4,13 +4,20 @@
     title: "Ebook Library",
     subtitle: "Manage your digital collection." do %>
 
+  <%= link_to "Upload Ebook",
+      new_ebook_path,
+      class: "rounded-lg bg-indigo-600 px-5 py-2.5 text-white transition hover:bg-indigo-700" %>
+
 <% end %>
+
+<!-- Dashboard Stats -->
+<%= render "shared/stats" %>
 
 <div class="mb-8 rounded-xl border border-slate-200 bg-white p-6 shadow-sm">
 
   <%= form_with url: ebooks_path,
-    method: :get,
-    local: true do |form| %>
+      method: :get,
+      local: true do |form| %>
 
     <div class="grid grid-cols-1 gap-4 md:grid-cols-2 lg:grid-cols-5">
 
@@ -60,3 +67,9 @@
 </div>
 
 <%= render "ebooks", ebooks: @ebooks %>
+
+<% if @pagy.pages > 1 %>
+  <div class="mt-10 flex justify-center">
+    <%== pagy_nav(@pagy) %>
+  </div>
+<% end %>

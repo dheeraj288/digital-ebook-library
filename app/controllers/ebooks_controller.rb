@@ -14,23 +14,28 @@ class EbooksController < ApplicationController
     @year   = params[:year]
     @sort   = params[:sort]
 
-    @ebooks = Ebook
-                .search(@query)
-                .filter_by_author(@author)
-                .filter_by_year(@year)
-                .sort_by_option(@sort)
+    ebooks = Ebook
+               .search(@query)
+               .filter_by_author(@author)
+               .filter_by_year(@year)
+               .sort_by_option(@sort)
+
+    @pagy, @ebooks = pagy(ebooks, limit: 8)
 
     @authors = Ebook.distinct.order(:author).pluck(:author)
 
     @years = Ebook
-                .where.not(published_at: nil)
-                .pluck(:published_at)
-                .map(&:year)
-                .uniq
-                .sort
-                .reverse
+               .where.not(published_at: nil)
+               .pluck(:published_at)
+               .map(&:year)
+               .uniq
+               .sort
+               .reverse
 
-    
+    # Dashboard Statistics
+    @total_ebooks = Ebook.count
+    @total_authors = Ebook.distinct.count(:author)
+    @total_years = @years.count
   end
 
   def show
