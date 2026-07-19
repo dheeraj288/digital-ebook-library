@@ -31,6 +31,11 @@ class EbooksController < ApplicationController
                .uniq
                .sort
                .reverse
+
+    # Dashboard Statistics
+    @total_ebooks = Ebook.count
+    @total_authors = Ebook.distinct.count(:author)
+    @total_years = @years.count
   end
 
   def show
