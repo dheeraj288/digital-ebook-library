@@ -1,24 +1,25 @@
 # 📚 Digital Ebook Library
 
-A modern Ruby on Rails application to manage a digital ebook collection.
+A modern **Ruby on Rails 7** application for managing a digital ebook collection. Users can upload ebooks with cover images and PDF files, search and filter the library, read ebooks online, and download them through a clean and responsive interface.
 
 ---
 
 ## ✨ Features
 
-- 📖 Ebook CRUD (Create, Read, Update, Delete)
-- 🖼 Upload Cover Images
-- 📄 Upload PDF Files
-- 🔍 Search by Title and Author
-- 🎯 Filter by Author
-- 📅 Filter by Published Year
-- ↕ Sort by Title and Date
-- 📖 Read PDF Online
-- ⬇ Download PDF
-- 🖼 Image Preview (StimulusJS)
-- 💬 Flash Messages
-- 📱 Responsive Tailwind CSS UI
-- 💾 Active Storage Integration
+- ✅ Ebook CRUD (Create, Read, Update, Delete)
+- ✅ Upload Cover Images (Active Storage)
+- ✅ Upload PDF Files
+- ✅ Read PDF in Browser
+- ✅ Download PDF
+- ✅ Search by Title & Author
+- ✅ Filter by Author
+- ✅ Filter by Published Year
+- ✅ Sort by Title & Created Date
+- ✅ Pagination with Pagy
+- ✅ Image Preview using StimulusJS
+- ✅ Flash Messages
+- ✅ Responsive UI with Tailwind CSS
+- ✅ Model & Request Specs using RSpec
 
 ---
 
@@ -31,44 +32,43 @@ A modern Ruby on Rails application to manage a digital ebook collection.
 - Hotwire
 - StimulusJS
 - Active Storage
+- Pagy
+- RSpec
+- FactoryBot
+- Faker
 
 ---
 
-## 🚀 Installation
+## 🚀 Getting Started
 
-Clone the repository
+### Clone Repository
 
 ```bash
 git clone https://github.com/dheeraj288/digital-ebook-library.git
-```
-
-Move into the project
-
-```bash
 cd digital-ebook-library
 ```
 
-Install dependencies
+### Install Dependencies
 
 ```bash
 bundle install
 ```
 
-Setup database
+### Setup Database
 
 ```bash
-rails db:create
-rails db:migrate
-rails db:seed
+bin/rails db:create
+bin/rails db:migrate
+bin/rails db:seed
 ```
 
-Start the server
+### Run Application
 
 ```bash
 bin/dev
 ```
 
-Open
+Visit:
 
 ```
 http://localhost:3000
@@ -76,21 +76,102 @@ http://localhost:3000
 
 ---
 
-## 📁 Project Structure
+## 🧪 Run Tests
+
+```bash
+bundle exec rspec
+```
+
+---
+
+## 📂 Project Structure
 
 ```
 app/
- ├── controllers/
- ├── models/
- ├── views/
- ├── javascript/
- ├── helpers/
+├── controllers/
+├── models/
+├── views/
+├── javascript/
+├── helpers/
 
 config/
 db/
+spec/
 storage/
 ```
 
+---
+
+## 📸 Screenshots
+
+You can add screenshots here.
+
+- Home Page
+- Upload Ebook
+- Ebook Details
+- Edit Ebook
+- Search & Filter
+- Pagination
+- Show
+
+---
+
+## 📸 Screenshots
+
+### Home Page
+
+![Home](screenshots/home.png)
+
+---
+
+### Upload Ebook
+
+![Upload](screenshots/upload.png)
+
+---
+
+### Upload Ebook
+
+![Upload](screenshots/show.png)
+
+---
+
+### Ebook Details
+
+![Details](screenshots/details.png)
+
+---
+
+### Edit Ebook
+
+![Edit](screenshots/edit.png)
+
+---
+
+### Search & Filter
+
+![Search](screenshots/search-filter.png)
+
+---
+
+### Pagination
+
+![Pagination](screenshots/pagination.png)
+
+---
+
+
+---
+
+## 🔮 Future Improvements
+
+- User Authentication
+- Favorite Books
+- Categories & Tags
+- Admin Dashboard
+- Book Ratings & Reviews
+
+---
 
 ## 👨‍💻 Author
 
