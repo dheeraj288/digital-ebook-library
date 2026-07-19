@@ -21,5 +21,14 @@
 
       <%= yield %>
     </main>
+    <script>
+      document.addEventListener("turbo:load", () => {
+        setTimeout(() => {
+          document.querySelectorAll("[data-flash]").forEach((flash) => {
+            flash.remove();
+          });
+        }, 3000);
+      });
+    </script>
   </body>
 </html>
