@@ -142,20 +142,6 @@ storage/
 
 ![Pagination](screenshots/pagination.png)
 
----
-
-
----
-
-## 🔮 Future Improvements
-
-- User Authentication
-- Favorite Books
-- Categories & Tags
-- Admin Dashboard
-- Book Ratings & Reviews
-
----
 
 ## 👨‍💻 Author
 
